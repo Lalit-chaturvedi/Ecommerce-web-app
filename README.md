@@ -1,5 +1,4 @@
-**E-Commerce Service
-**
+**E-Commerce Service**
 A Spring Boot-based microservice for handling e-commerce operations, including product management, customer registration, order processing, and payment integration.
 
 **Features**
@@ -15,8 +14,8 @@ A Spring Boot-based microservice for handling e-commerce operations, including p
 
 🛠 Docker & CI/CD: Ready for containerized deployment.
 
-**Tech Stack
-**
+**Tech Stack**
+
 **Backend**: Spring Boot, Spring Data JPA, Spring Security
 
 **Database**: MySQL / PostgreSQL
