@@ -30,7 +30,7 @@ Build System: Maven
 Setup Instructions
 1. Clone the Repository
 bash
-git clone https://github.com/example/ecommerce-service.git
+git clone [https://github.com/Lalit-chaturvedi/Ecommerce-web-service.git]
 cd ecommerce-service
 2. Configure Database
 Update src/main/resources/application.properties:
