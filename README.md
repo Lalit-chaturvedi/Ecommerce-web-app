@@ -1,7 +1,8 @@
-E-Commerce Service
+**E-Commerce Service
+**
 A Spring Boot-based microservice for handling e-commerce operations, including product management, customer registration, order processing, and payment integration.
 
-Features
+**Features**
 🛒 Product Management: Add, update, and retrieve product details.
 
 👤 Customer Registration: Store customer details securely in MySQL using JPA.
@@ -14,20 +15,19 @@ Features
 
 🛠 Docker & CI/CD: Ready for containerized deployment.
 
-Tech Stack
-Backend: Spring Boot, Spring Data JPA, Spring Security
+**Tech Stack
+**
+**Backend**: Spring Boot, Spring Data JPA, Spring Security
 
-Database: MySQL / PostgreSQL
+**Database**: MySQL / PostgreSQL
 
-Authentication: JWT
+**Authentication**: JWT
 
-Cloud Integration: AWS S3 (for storing product images)
+**Deployment**: Docker, Kubernetes
 
-Deployment: Docker, Kubernetes
+**Build System**: Maven
 
-Build System: Maven
-
-Setup Instructions
+**Setup Instructions**
 1. Clone the Repository
 bash
 git clone [https://github.com/Lalit-chaturvedi/Ecommerce-web-service.git]
