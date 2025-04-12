@@ -1,0 +1,114 @@
+openapi: 3.0.0
+info:
+  title: Auth Service API
+  version: 1.0.0
+  description: REST API for user registration, login, and OTP verification.
+
+servers:
+  - url: https://api.yourdomain.com
+    description: Production Server
+
+paths:
+  /api/auth/register:
+    post:
+      summary: Register a new user
+      operationId: registerUser
+      tags:
+        - Auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRegisterRequest'
+            example:
+              email: "user@example.com"
+              password: "securePassword123"
+              role: "USER"
+              phoneNumber: "+1234567890"
+      responses:
+        '200':
+          description: Successfully registered
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserRegisterResponse'
+
+  /api/auth/login:
+    post:
+      summary: Authenticate an existing user
+      operationId: loginUser
+      tags:
+        - Auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserLoginRequest'
+            example:
+              email: "user@example.com"
+              password: "securePassword123"
+      responses:
+        '200':
+          description: Successfully authenticated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserLoginResponse'
+
+
+components:
+  schemas:
+    UserRegisterRequest:
+      type: object
+      required: [email, password, phoneNumber]
+      properties:
+        email:
+          type: string
+          format: email
+          example: user@example.com
+        password:
+          type: string
+          format: password
+          example: securePassword123
+        phoneNumber:
+          type: string
+          example: "+1234567890"
+        role:
+          type: string
+          example: USER
+
+    UserLoginRequest:
+      type: object
+      required: [email, password]
+      properties:
+        email:
+          type: string
+          format: email
+          example: user@example.com
+        password:
+          type: string
+          format: password
+          example: securePassword123
+
+
+    UserRegisterResponse:
+      type: object
+      properties:
+        token:
+          type: string
+          example: "User registered successfully"
+        message:
+          type: string
+          example: "Register successful"
+
+    UserLoginResponse:
+      type: object
+      properties:
+        token:
+          type: string
+          example: "User logged in successfully"
+        message:
+          type: string
+          example: "Login successful"
