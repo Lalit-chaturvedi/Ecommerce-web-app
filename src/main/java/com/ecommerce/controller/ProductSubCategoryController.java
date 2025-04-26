@@ -29,18 +29,17 @@ public class ProductSubCategoryController {
     }
 
     /*
-    {
-  "name": "string",
-  "description": "string",
-  "active": true,
-  "productCategory": {
-    "id": 1,
-    "name": "string",
-    "description": "string",
-    "active": true
-
-  }
-}
+     * {
+     *   "name": "string",
+     *   "description": "string",
+     *   "active": true,
+     *   "productCategory": {
+     *     "id": 1,
+     *     "name": "string",
+     *     "description": "string",
+     *     "active": true
+     *   }
+     * }
      */
     @PostMapping
     public ProductSubCategory createSubCategory(@RequestBody ProductSubCategory productSubCategory) {
