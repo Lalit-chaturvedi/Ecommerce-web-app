@@ -26,19 +26,11 @@ public class ProductCategoryService {
         return productCategoryRepository.findById(id);
     }
 
-    public Optional<ProductCategory> getCategoryByName(String name) {
-        return productCategoryRepository.findByCategoryName(name);
-    }
 
     public ProductCategory saveCategory(ProductCategory productCategory) {
         return productCategoryRepository.save(productCategory);
     }
     public ProductCategory createCategory(ProductCategory productCategory) {
-//        return productCategoryRepository.save(new ProductCategory(
-//                productCategory.getName(),
-//                productCategory.getDescription(),
-//                productCategory.isActive()
-//        ));
         return productCategoryRepository.save(productCategory);
     }
 

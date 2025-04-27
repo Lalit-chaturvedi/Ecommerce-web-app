@@ -2,6 +2,7 @@ package com.ecommerce.controller;
 
 import com.ecommerce.persistence.entity.ProductCategory;
 import com.ecommerce.service.ProductCategoryService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,8 +39,12 @@ public class ProductCategoryController {
      * }
      */
     @PostMapping
-    public ProductCategory createCategory(@RequestBody ProductCategory productCategory) {
-        return productCategoryService.createCategory(productCategory);
+    public ResponseEntity<String > createCategory(@RequestBody ProductCategory productCategory) {
+        if(productCategory == null) {
+            return new ResponseEntity<>("ProductCategory cannot be null", HttpStatus.BAD_REQUEST);
+        }
+        productCategoryService.createCategory(productCategory);
+        return new ResponseEntity<>("ProductCategory created successfully", HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
