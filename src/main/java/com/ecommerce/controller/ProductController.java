@@ -3,10 +3,19 @@ package com.ecommerce.controller;
 import com.ecommerce.persistence.entity.Product;
 import com.ecommerce.service.ProductService;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * @author Hitesh
@@ -73,6 +82,10 @@ public class ProductController {
         productService.createProduct(product);
         return new ResponseEntity<>("Product created successfully", HttpStatus.CREATED);
     }
+
+
+
+
 
     /*
     {

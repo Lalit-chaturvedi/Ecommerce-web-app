@@ -32,4 +32,8 @@ public class Product {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(referencedColumnName = "product_id", name = "fk_product_id")
     List<ProductChangesQuestions> productChangesQuestionsList = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(referencedColumnName = "product_id", name = "fk_product_id")
+    List<ProductImages> productImagesList = new ArrayList<>();
 }
