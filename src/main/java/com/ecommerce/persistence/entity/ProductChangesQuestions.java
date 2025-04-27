@@ -1,6 +1,5 @@
 package com.ecommerce.persistence.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -8,15 +7,17 @@ import lombok.Data;
  * @author Hitesh
  */
 @Entity
-@Table(name = "productsubcategory")
+@Table(name = "product_changes_questions")
 @Data
-public class ProductSubCategory {
+public class ProductChangesQuestions {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "productsubcategory_id")
+    @Column(name = "product_chagques_id")
     private Long id;
-    private String name;
-    private String description;
+
+    private String question;
+    private boolean answer;
     private boolean active = false;
 
 }

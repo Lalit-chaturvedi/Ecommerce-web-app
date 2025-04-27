@@ -16,16 +16,14 @@ import java.util.List;
 public class ProductCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "productcategory_id")
     private Long id;
     private String name;
     private String description;
-    private boolean active;
-    @OneToMany(mappedBy = "productCategory", cascade = CascadeType.ALL, orphanRemoval = true)
+    private boolean active = false;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(referencedColumnName = "productcategory_id", name = "fk_productcategory_id")
     private List<ProductSubCategory> productSubCategoryList = new ArrayList<>();
-//    public ProductCategory(String name, String description, boolean active) {
-//        this.name = name;
-//        this.description = description;
-//        this.active = active;
-//    }
+
 
 }
