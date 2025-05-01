@@ -18,7 +18,6 @@ public class ProductCategory {
     @Column(name = "productcategory_id")
     private Long id;
     private String name;
-    private String description;
     private boolean active = false;
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(referencedColumnName = "productcategory_id", name = "fk_productcategory_id")
