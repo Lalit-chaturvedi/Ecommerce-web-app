@@ -1,0 +1,64 @@
+package com.ecommerce.product.controller;
+
+import com.ecommerce.product.entity.ProductCategory;
+import com.ecommerce.product.service.ProductCategoryService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+/*
+ * @author Hitesh
+ */
+@RestController
+@RequestMapping("/api/product-categories")
+public class ProductCategoryController {
+    private final ProductCategoryService productCategoryService;
+
+    public ProductCategoryController(ProductCategoryService productCategoryService) {
+        this.productCategoryService = productCategoryService;
+    }
+
+    @GetMapping
+    public List<ProductCategory> getAllCategories() {
+        return productCategoryService.getAllCategories();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ProductCategory> getCategoryById(@PathVariable Long id) {
+        return productCategoryService.getCategoryById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    /*
+     * {
+     *   "name": "string",
+     *   "description": "string",
+     *   "active": true
+     * }
+     */
+    @PostMapping
+    public ResponseEntity<String > createCategory(@RequestBody ProductCategory productCategory) {
+        if(productCategory == null) {
+            return new ResponseEntity<>("ProductCategory cannot be null", HttpStatus.BAD_REQUEST);
+        }
+        productCategoryService.createCategory(productCategory);
+        return new ResponseEntity<>("ProductCategory created successfully", HttpStatus.CREATED);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ProductCategory> updateCategory(@PathVariable Long id, @RequestBody ProductCategory updatedCategory) {
+        try {
+            return ResponseEntity.ok(productCategoryService.updateCategory(id, updatedCategory));
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+//
+//    @DeleteMapping("/{id}")
+//    public ResponseEntity<Void> deleteCategory(@PathVariable Long id) {
+//        productCategoryService.deleteCategory(id);
+//        return ResponseEntity.noContent().build();
+//    }
+}
