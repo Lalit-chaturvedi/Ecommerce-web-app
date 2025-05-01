@@ -20,7 +20,6 @@ public class ProductImages {
     private String imageType;
     private long imageSize;
     private String imagePath;
-    private String imageDescription;
     private boolean active = false;
     private boolean defaultImage = false;
 }

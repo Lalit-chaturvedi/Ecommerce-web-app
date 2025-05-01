@@ -38,11 +38,12 @@ public class ProductService {
         return productRepository.findById(id);
     }
 
-    public Product saveProduct(Product Product) {
-        return productRepository.save(Product);
+    public Product saveProduct(Product product) {
+        return productRepository.save(product);
     }
-    public Product createProduct(Product Product) {
-        return productRepository.save(Product);
+    public Product createProduct(Product product) {
+        System.out.println("##"+product.getProductCategory().getProductSubCategoryList().get(0).getName());
+        return productRepository.save(product);
     }
 
     public Product updateProduct(Long id, Product product) {
@@ -107,7 +108,6 @@ public class ProductService {
             productImages.setImageType(imageType);
             productImages.setImageUrl("http://localhost:8080/products/" + id + "/image");
             productImages.setActive(true);
-            productImages.setImageDescription("Product image for Front image " + product.getName());
             productImages.setDefaultImage(true); // Set default image to true
             product.getProductImagesList().add(productImages);
             productRepository.save(product);

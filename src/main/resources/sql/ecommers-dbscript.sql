@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 01, 2025 at 09:10 AM
+-- Generation Time: May 01, 2025 at 11:15 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -30,22 +30,8 @@ SET time_zone = "+00:00";
 CREATE TABLE `productcategory` (
   `active` bit(1) NOT NULL,
   `productcategory_id` bigint(20) NOT NULL,
-  `description` varchar(255) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
-
---
--- Dumping data for table `productcategory`
---
-
-INSERT INTO `productcategory` (`active`, `productcategory_id`, `description`, `name`) VALUES
-(b'1', 1, 'description', 'Furniture'),
-(b'1', 2, 'description', 'Artifects'),
-(b'1', 3, 'description', 'Lights'),
-(b'1', 4, 'description', 'Doors'),
-(b'1', 5, 'description', 'Office Furniture'),
-(b'1', 6, 'description', 'Furnishings'),
-(b'0', 7, 'description', 'XYZ');
 
 -- --------------------------------------------------------
 
@@ -73,49 +59,8 @@ CREATE TABLE `productsubcategory` (
   `active` bit(1) NOT NULL,
   `fk_productcategory_id` bigint(20) DEFAULT NULL,
   `productsubcategory_id` bigint(20) NOT NULL,
-  `description` varchar(255) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
-
---
--- Dumping data for table `productsubcategory`
---
-
-INSERT INTO `productsubcategory` (`active`, `fk_productcategory_id`, `productsubcategory_id`, `description`, `name`) VALUES
-(b'1', 1, 1, 'description', 'Bed'),
-(b'1', 1, 2, 'description', 'Sofa'),
-(b'1', 1, 3, 'description', 'Center Table'),
-(b'1', 1, 4, 'description', 'Bed side table'),
-(b'1', 1, 5, 'description', 'Bed Bench'),
-(b'1', 1, 6, 'description', 'Dining Table'),
-(b'1', 1, 7, 'description', 'Dining chair'),
-(b'1', 1, 8, 'description', 'Crockery Unit'),
-(b'1', 1, 9, 'description', 'Dining Cabinet'),
-(b'1', 2, 10, 'description', 'Wall Artifect'),
-(b'1', 2, 11, 'description', 'Table Artifect'),
-(b'1', 2, 12, 'description', 'Wall Paintings'),
-(b'1', 2, 13, 'description', 'Hanging Artifects'),
-(b'1', 3, 14, 'description', 'Table Lamp'),
-(b'1', 3, 15, 'description', 'Wall Lamp'),
-(b'1', 3, 16, 'description', 'Hanging Lamp'),
-(b'1', 3, 17, 'description', 'Chandilier'),
-(b'1', 3, 18, 'description', 'Outdoor Wall Lamp'),
-(b'1', 3, 19, 'description', 'Outdoor Pole Light'),
-(b'1', 3, 20, 'description', 'Indoor Ceiling Lights'),
-(b'1', 3, 21, 'description', 'Pole Lamps'),
-(b'1', 4, 22, 'description', 'Flush Doors'),
-(b'1', 4, 23, 'description', 'Alluminium Doors'),
-(b'1', 4, 24, 'description', 'Electric doors'),
-(b'1', 5, 25, 'description', 'Office Desk'),
-(b'1', 5, 26, 'description', 'Workstation'),
-(b'1', 5, 27, 'description', 'Boss Chair'),
-(b'1', 5, 28, 'description', 'Staff Chair'),
-(b'1', 5, 29, 'description', 'Stool'),
-(b'1', 5, 30, 'description', 'Conferrence table'),
-(b'1', 5, 31, 'description', 'Side Cabinet'),
-(b'1', 6, 32, 'description', 'Curtain'),
-(b'1', 6, 33, 'description', 'Sheer'),
-(b'1', 6, 34, 'description', 'Bedsheets');
 
 -- --------------------------------------------------------
 
@@ -143,12 +88,70 @@ CREATE TABLE `product_images` (
   `fk_product_id` bigint(20) DEFAULT NULL,
   `image_size` bigint(20) NOT NULL,
   `product_images_id` bigint(20) NOT NULL,
-  `image_description` varchar(255) DEFAULT NULL,
   `image_name` varchar(255) DEFAULT NULL,
   `image_path` varchar(255) DEFAULT NULL,
   `image_type` varchar(255) DEFAULT NULL,
   `image_url` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `static_values`
+--
+
+CREATE TABLE `static_values` (
+  `active` bit(1) NOT NULL,
+  `static_values_id` int(11) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `value` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `static_values`
+--
+
+INSERT INTO `static_values` (`active`, `static_values_id`, `name`, `value`) VALUES
+(b'1', 1, 'Product-SubCategory', 'Bed'),
+(b'1', 2, 'Product-SubCategory', 'Sofa'),
+(b'1', 3, 'Product-SubCategory', 'Center Table'),
+(b'1', 4, 'Product-SubCategory', 'Bed side table'),
+(b'1', 5, 'Product-SubCategory', 'Bed Bench'),
+(b'1', 6, 'Product-SubCategory', 'Dining Table'),
+(b'1', 7, 'Product-SubCategory', 'Dining chair'),
+(b'1', 8, 'Product-SubCategory', 'Crockery Unit'),
+(b'1', 9, 'Product-SubCategory', 'Dining Cabinet'),
+(b'1', 10, 'Product-SubCategory', 'Wall Artifect'),
+(b'1', 11, 'Product-SubCategory', 'Table Artifect'),
+(b'1', 12, 'Product-SubCategory', 'Wall Paintings'),
+(b'1', 13, 'Product-SubCategory', 'Hanging Artifects'),
+(b'1', 14, 'Product-SubCategory', 'Table Lamp'),
+(b'1', 15, 'Product-SubCategory', 'Wall Lamp'),
+(b'1', 16, 'Product-SubCategory', 'Hanging Lamp'),
+(b'1', 17, 'Product-SubCategory', 'Chandilier'),
+(b'1', 18, 'Product-SubCategory', 'Outdoor Wall Lamp'),
+(b'1', 19, 'Product-SubCategory', 'Outdoor Pole Light'),
+(b'1', 20, 'Product-SubCategory', 'Indoor Ceiling Lights'),
+(b'1', 21, 'Product-SubCategory', 'Pole Lamps'),
+(b'1', 22, 'Product-SubCategory', 'Flush Doors'),
+(b'1', 23, 'Product-SubCategory', 'Alluminium Doors'),
+(b'1', 24, 'Product-SubCategory', 'Electric doors'),
+(b'1', 25, 'Product-SubCategory', 'Office Desk'),
+(b'1', 26, 'Product-SubCategory', 'Workstation'),
+(b'1', 27, 'Product-SubCategory', 'Boss Chair'),
+(b'1', 28, 'Product-SubCategory', 'Staff Chair'),
+(b'1', 29, 'Product-SubCategory', 'Stool'),
+(b'1', 30, 'Product-SubCategory', 'Conferrence table'),
+(b'1', 31, 'Product-SubCategory', 'Side Cabinet'),
+(b'1', 32, 'Product-SubCategory', 'Curtain'),
+(b'1', 33, 'Product-SubCategory', 'Sheer'),
+(b'1', 34, 'Product-SubCategory', 'Bedsheets'),
+(b'1', 35, 'Product-Category', 'Furniture'),
+(b'1', 36, 'Product-Category', 'Artifects'),
+(b'1', 37, 'Product-Category', 'Lights'),
+(b'1', 38, 'Product-Category', 'Doors'),
+(b'1', 39, 'Product-Category', 'Office Furniture'),
+(b'1', 40, 'Product-Category', 'Furnishings');
 
 -- --------------------------------------------------------
 
@@ -204,6 +207,12 @@ ALTER TABLE `product_images`
   ADD KEY `FK7qc4o7l9txirqtpdkleqtcasm` (`fk_product_id`);
 
 --
+-- Indexes for table `static_values`
+--
+ALTER TABLE `static_values`
+  ADD PRIMARY KEY (`static_values_id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -218,7 +227,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `productcategory`
 --
 ALTER TABLE `productcategory`
-  MODIFY `productcategory_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `productcategory_id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -230,7 +239,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `productsubcategory`
 --
 ALTER TABLE `productsubcategory`
-  MODIFY `productsubcategory_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `productsubcategory_id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `product_changes_questions`
@@ -243,6 +252,12 @@ ALTER TABLE `product_changes_questions`
 --
 ALTER TABLE `product_images`
   MODIFY `product_images_id` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `static_values`
+--
+ALTER TABLE `static_values`
+  MODIFY `static_values_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `users`

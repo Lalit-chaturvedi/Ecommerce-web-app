@@ -16,7 +16,6 @@ public class ProductSubCategory {
     @Column(name = "productsubcategory_id")
     private Long id;
     private String name;
-    private String description;
     private boolean active = false;
 
 }
