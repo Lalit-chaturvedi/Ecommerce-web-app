@@ -23,7 +23,7 @@ public class VerificationTokenService {
         VerificationToken token = new VerificationToken();
         token.setToken(UUID.randomUUID().toString());
         token.setUser(user);
-        token.setExpiryDate(LocalDateTime.now().plusHours(24)); // Token valid for 24 hours
+        token.setExpiryDate(LocalDateTime.now().plusMinutes(15)); // Token valid for 15 minutes
         return tokenRepository.save(token);
     }
 }
