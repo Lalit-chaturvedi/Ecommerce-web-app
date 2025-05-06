@@ -19,7 +19,7 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @Value("${app.verification-link}")
+    @Value("${app.email.verification.link}")
     private String verificationUrl;
 
     public User register(User user) {
