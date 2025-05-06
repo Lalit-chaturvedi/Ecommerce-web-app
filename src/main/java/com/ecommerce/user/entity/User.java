@@ -17,7 +17,7 @@ public class User {
     @Email
     @Column(unique = true, nullable = false)
     private String email;
-
+    private boolean emailVerified;
     @NotBlank
     @Column(nullable = false)
     private String password;

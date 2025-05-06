@@ -1,6 +1,7 @@
 package com.ecommerce.user.service;
 
 import com.ecommerce.user.entity.User;
+import com.ecommerce.user.entity.VerificationToken;
 import com.ecommerce.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -13,6 +14,8 @@ public class UserService {
     private UserRepository userRepository;
 
     @Autowired
+    private VerificationTokenService verificationTokenService;
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     public User register(User user) {
@@ -21,7 +24,11 @@ public class UserService {
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setPhoneVerified(false);
-        return userRepository.save(user);
+
+        User createdUser= userRepository.save(user);
+        String token = verificationTokenService.createToken(createdUser).getToken();
+        sendEmailForVerification(createdUser, token);
+        return createdUser;
     }
 
     public User login(String email, String password) {
@@ -33,4 +40,15 @@ public class UserService {
         return user;
     }
 
+    @Autowired
+    private VerificationTokenService tokenService;
+
+    @Autowired
+    private EmailService emailService;
+
+    private void sendEmailForVerification(User user,String token) {
+        // Send verification email
+        String verificationLink = "http://localhost:8080/api/v1/auth/verify-email?token=" + token;
+        emailService.sendVerificationEmail(user.getEmail(), verificationLink);
+    }
 }

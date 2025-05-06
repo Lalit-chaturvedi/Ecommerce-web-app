@@ -7,6 +7,7 @@ import com.ecommerce.user.model.UserLoginResponse;
 import com.ecommerce.user.model.UserRegisterRequest;
 import com.ecommerce.user.model.UserRegisterResponse;
 import com.ecommerce.user.service.UserService;
+import com.ecommerce.user.service.VerificationTokenService;
 import com.ecommerce.utils.ApiExampleResponseUtil;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -37,6 +38,7 @@ public class AuthController{
 
     @Autowired
     private UserService userService;
+
 
     @Autowired
     UserMapper userMapper;
