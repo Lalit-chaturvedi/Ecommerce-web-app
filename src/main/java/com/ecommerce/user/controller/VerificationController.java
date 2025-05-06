@@ -24,7 +24,7 @@ public class VerificationController {
                 .orElseThrow(() -> new IllegalArgumentException("Invalid token"));
 
         if (verificationToken.getExpiryDate().isBefore(LocalDateTime.now())) {
-            return ResponseEntity.badRequest().body("Token expVerificationTokenired");
+            return ResponseEntity.badRequest().body("Token expired !!! Verification Token Failed");
         }
 
         verificationToken.getUser().setEmailVerified(true);
