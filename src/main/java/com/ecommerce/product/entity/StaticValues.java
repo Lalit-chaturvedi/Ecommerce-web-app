@@ -16,6 +16,7 @@ public class StaticValues {
     @Column(name = "static_values_id")
     private int id;
     private String name;
+    private String category;
     private String value;
     private boolean active = false;
 

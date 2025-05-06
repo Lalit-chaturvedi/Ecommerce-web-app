@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 06, 2025 at 04:34 PM
+-- Generation Time: May 06, 2025 at 07:07 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -43,7 +43,8 @@ INSERT INTO `productcategory` (`active`, `productcategory_id`, `name`) VALUES
 (b'1', 3, 'Lights'),
 (b'1', 4, 'Doors'),
 (b'1', 5, 'Office Furniture'),
-(b'1', 6, 'Furnishings');
+(b'1', 6, 'Furnishings'),
+(b'1', 7, 'string');
 
 -- --------------------------------------------------------
 
@@ -60,6 +61,13 @@ CREATE TABLE `products` (
   `description` varchar(255) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`active`, `price`, `fk_productcategory_id`, `product_id`, `color`, `description`, `name`) VALUES
+(b'1', 0.1, 7, 1, 'string', 'string', 'string');
 
 -- --------------------------------------------------------
 
@@ -112,7 +120,8 @@ INSERT INTO `productsubcategory` (`active`, `fk_productcategory_id`, `productsub
 (b'1', 5, 31, 'Side Cabinet'),
 (b'1', 6, 32, 'Curtain'),
 (b'1', 6, 33, 'Sheer'),
-(b'1', 6, 34, 'Bedsheets');
+(b'1', 6, 34, 'Bedsheets'),
+(b'1', 7, 35, 'string');
 
 -- --------------------------------------------------------
 
@@ -127,6 +136,13 @@ CREATE TABLE `product_changes_questions` (
   `product_chagques_id` bigint(20) NOT NULL,
   `question` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `product_changes_questions`
+--
+
+INSERT INTO `product_changes_questions` (`active`, `answer`, `fk_product_id`, `product_chagques_id`, `question`) VALUES
+(b'1', b'1', 1, 1, 'string');
 
 -- --------------------------------------------------------
 
@@ -145,6 +161,13 @@ CREATE TABLE `product_images` (
   `image_type` varchar(255) DEFAULT NULL,
   `image_url` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `product_images`
+--
+
+INSERT INTO `product_images` (`active`, `default_image`, `fk_product_id`, `image_size`, `product_images_id`, `image_name`, `image_path`, `image_type`, `image_url`) VALUES
+(b'1', b'1', 1, 9007199254740991, 1, 'string', 'string', 'string', 'string');
 
 -- --------------------------------------------------------
 
@@ -214,7 +237,12 @@ INSERT INTO `static_values` (`active`, `static_values_id`, `name`, `value`, `cat
 (b'1', 47, 'DecoreArea', 'Hall', NULL),
 (b'1', 48, 'DecoreArea', 'Master Bedroom', NULL),
 (b'1', 49, 'DecoreArea', 'Parents Bedroom', NULL),
-(b'1', 50, 'DecoreArea', 'Child Bedroom', NULL);
+(b'1', 50, 'DecoreArea', 'Child Bedroom', NULL),
+(b'1', 51, 'UserRole', 'Admin', NULL),
+(b'1', 52, 'UserRole', 'Consumer', NULL),
+(b'1', 53, 'UserRole', 'Vender', NULL),
+(b'1', 54, 'UserRole', 'Staff', NULL),
+(b'1', 55, 'UserRole', 'Architect', NULL);
 
 -- --------------------------------------------------------
 
@@ -228,7 +256,28 @@ CREATE TABLE `users` (
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `phone_number` varchar(255) DEFAULT NULL,
-  `role` varchar(255) DEFAULT NULL
+  `role` varchar(255) DEFAULT NULL,
+  `email_verified` bit(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`phone_verified`, `id`, `email`, `password`, `phone_number`, `role`, `email_verified`) VALUES
+(b'0', 10, 'hiteshusare@gmail.com', '$2a$10$6Kw7tNuHgOUwgorxpo6iquljCN6lUL3EobPETrY4hUeJXImv62XwG', '+1234567890', 'USER', b'1');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `verification_token`
+--
+
+CREATE TABLE `verification_token` (
+  `id` bigint(20) NOT NULL,
+  `expiry_date` datetime(6) NOT NULL,
+  `token` varchar(255) NOT NULL,
+  `user_id` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
@@ -283,6 +332,14 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `UK6dotkott2kjsp8vw4d0m25fb7` (`email`);
 
 --
+-- Indexes for table `verification_token`
+--
+ALTER TABLE `verification_token`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `UKp678btf3r9yu6u8aevyb4ff0m` (`token`),
+  ADD UNIQUE KEY `UKq6jibbenp7o9v6tq178xg88hg` (`user_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -290,43 +347,49 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `productcategory`
 --
 ALTER TABLE `productcategory`
-  MODIFY `productcategory_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `productcategory_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `product_id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `product_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `productsubcategory`
 --
 ALTER TABLE `productsubcategory`
-  MODIFY `productsubcategory_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `productsubcategory_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `product_changes_questions`
 --
 ALTER TABLE `product_changes_questions`
-  MODIFY `product_chagques_id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `product_chagques_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `product_images`
 --
 ALTER TABLE `product_images`
-  MODIFY `product_images_id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `product_images_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `static_values`
 --
 ALTER TABLE `static_values`
-  MODIFY `static_values_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `static_values_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `verification_token`
+--
+ALTER TABLE `verification_token`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Constraints for dumped tables
@@ -355,6 +418,12 @@ ALTER TABLE `product_changes_questions`
 --
 ALTER TABLE `product_images`
   ADD CONSTRAINT `FK7qc4o7l9txirqtpdkleqtcasm` FOREIGN KEY (`fk_product_id`) REFERENCES `products` (`product_id`);
+
+--
+-- Constraints for table `verification_token`
+--
+ALTER TABLE `verification_token`
+  ADD CONSTRAINT `FK3asw9wnv76uxu3kr1ekq4i1ld` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
