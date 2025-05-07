@@ -17,6 +17,7 @@ public class ProductCategory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "productcategory_id")
     private Long id;
+    @Column(unique = true, nullable = false)
     private String name;
     private boolean active = false;
     @OneToMany(cascade = CascadeType.ALL)

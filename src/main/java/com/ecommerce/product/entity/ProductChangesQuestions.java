@@ -15,7 +15,7 @@ public class ProductChangesQuestions {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "product_chagques_id")
     private Long id;
-
+    @Column(unique = true, nullable = false)
     private String question;
     private boolean answer;
     private boolean active = false;

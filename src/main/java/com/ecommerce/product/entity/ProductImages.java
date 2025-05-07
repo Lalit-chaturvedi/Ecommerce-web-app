@@ -15,6 +15,7 @@ public class ProductImages {
     @Column(name = "product_images_id")
     private Long id;
 
+    @Column(unique = true, nullable = false)
     private String imageUrl;
     private String imageName;
     private String imageType;

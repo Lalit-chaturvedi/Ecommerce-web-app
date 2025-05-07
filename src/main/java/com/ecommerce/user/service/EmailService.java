@@ -19,7 +19,7 @@ public class EmailService {
     public void sendVerificationEmail(String toEmail, String verificationLink) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(toEmail);
-        message.setSubject("Email Verification");
+        message.setSubject("E-commerce App - Email Verification");
         message.setText("Click the link to verify your email: " + verificationLink);
         javaMailSender.send(message);
     }
