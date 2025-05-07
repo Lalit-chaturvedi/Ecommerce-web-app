@@ -28,6 +28,7 @@ public class VerificationController {
         }
 
         verificationToken.getUser().setEmailVerified(true);
+        verificationToken.getUser().setActive(true);
         tokenRepository.delete(verificationToken); // Optional: Delete token after verification
 
         return ResponseEntity.ok("Email verified successfully");

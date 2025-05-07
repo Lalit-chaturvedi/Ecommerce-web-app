@@ -15,6 +15,7 @@ public class ProductSubCategory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "productsubcategory_id")
     private Long id;
+    @Column(unique = true, nullable = false)
     private String name;
     private boolean active = false;
 

@@ -3,6 +3,7 @@ package com.ecommerce.user.service;
 import com.ecommerce.user.entity.User;
 import com.ecommerce.user.entity.VerificationToken;
 import com.ecommerce.user.repository.UserRepository;
+import com.ecommerce.user.repository.VerificationTokenRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -15,6 +16,9 @@ public class UserService {
     private UserRepository userRepository;
 
     @Autowired
+    private VerificationTokenRepository tokenRepository;
+
+    @Autowired
     private VerificationTokenService verificationTokenService;
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -23,9 +27,18 @@ public class UserService {
     private String verificationUrl;
 
     public User register(User user) {
-        if (userRepository.findByEmail(user.getEmail()).isPresent()) {
-            throw new RuntimeException("Email already registered");
-        }
+        userRepository.findByEmail(user.getEmail())
+                .ifPresent(existingUser -> {
+                    if(existingUser.isActive()){
+                        throw new RuntimeException("Email already registered");
+                    }else{
+                        VerificationToken token = tokenRepository.findByUser(existingUser)
+                                .orElseThrow(() -> new RuntimeException("Token not found"));
+                        token.setUser(existingUser);
+                        tokenRepository.delete(token);
+                        userRepository.delete(existingUser);
+                    }
+                });
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setPhoneVerified(false);
 
